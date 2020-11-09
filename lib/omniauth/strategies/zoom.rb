@@ -12,7 +12,27 @@ module OmniAuth
       option :client_options, site: 'https://zoom.us'
 
       uid { raw_info['id'] }
-      extra { {raw_info: raw_info} }
+      info do
+        {
+          name: [ raw_info['first_name'], raw_info['last_name'] ].compact.join(' '),
+          email: raw_info['email'],
+          nickname: '',
+          first_name: raw_info['first_name'],
+          last_name: raw_info['last_name'],
+          location: '',
+          descripotion: '',
+          image: raw_info['pic_url'],
+          phone: '',
+          urls: {
+            'personal_meeting_url' => raw_info['personal_meeting_url']
+          }
+        }
+      end
+      extra do
+        {
+          raw_info: raw_info
+        }
+      end
 
     protected
 
@@ -45,7 +65,7 @@ module OmniAuth
       end
 
       def callback_url
-        full_host + script_name + callback_path
+        options[:redirect_uri] || (full_host + script_name + callback_path)
       end
     end
   end
