@@ -14,13 +14,13 @@ module OmniAuth
       uid { raw_info['id'] }
       info do
         {
-          name: [ raw_info['first_name'], raw_info['last_name'] ].compact.join(' '),
+          name: [raw_info['first_name'], raw_info['last_name']].compact.join(' '),
           email: raw_info['email'],
           nickname: '',
           first_name: raw_info['first_name'],
           last_name: raw_info['last_name'],
           location: '',
-          descripotion: '',
+          description: '',
           image: raw_info['pic_url'],
           phone: '',
           urls: {
